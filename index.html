@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Herd Vs. Zombies</title>
+    <link rel="stylesheet" href="res/style.css">
+    <!--
+    <script src="bin/lib/core.js"></script>
+    <script src="bin/lib/aes.js"></script>
+    -->
+    <script src="bin/lib/jquery-2.1.0.js"></script>
+    <script src="bin/lib/markdown.js"></script>
+    <script src="bin/buttons.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="#H" id="home" class="navb">Home</a>
+      <a href="#I" id="info" class="navb">About</a>
+      <a href="#R" id="rule" class="navb">Rules</a>
+      <a href="#L" id="lore" class="navb">Login/Register</a>
+      <a href="#U" id="myac" class="navb">My account</a>
+      <a href="#H" id="Logout" class="navb hidden">Logout</a>
+    </nav>
+    <section id="H">      H    </section>
+    <section id="I" class="hidden">      I    </section>
+    <section id="R" class="hidden">      R    </section>
+    <section id="L" class="hidden">      L    </section>
+    <section id="F" class="hidden">      L    </section>
+    <section id="U" class="hidden">      U    </section>
+    <script type="application/javascript">
+      $.post("bin/login.php", {getuser:"getuser"} , function( data ) {
+        if(data=="Session error"){
+          $("#myac").addClass("hidden");
+        }else{
+          $("#login").addClass("hidden");
+          $("#Logout").removeClass("hidden");
+          $("#lore").addClass("hidden");
+        }
+        });
+      var width = $(window).width();
+      if ((width <= 799)) {
+	$('body').css('width', width);
+	$('.navb').css('font-size', 'x-large');	
+      }
+      $.get( "res/home.md", function( data ) {
+        $( "#H" ).html( markdown.toHTML(data) );
+      });
+      $.get( "res/home.html", function( data ) {
+      	$( "#H" ).html($("#H").html()+data);
+      });
+      $.get( "res/info.md", function( data ) {
+        $( "#I" ).html( markdown.toHTML(data) );
+      });
+      $.get( "res/rule.md", function( data ) {
+        $( "#R" ).html( markdown.toHTML(data) );
+      });
+      $.get( "res/lore.md", function( data ) {
+          var s = markdown.toHTML(data);
+          $( "#L" ).html( s );
+      });
+      $.get("res/lore.html", function( data ){
+        $( "#F" ).html( data );
+      });
+      $.get("res/usercp.html", function( data ) {
+	$( "#U" ).html(data);
+      });
+    </script>
+  </body>
+</html>

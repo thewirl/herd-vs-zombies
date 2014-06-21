@@ -1,0 +1,78 @@
+<section id="Control Panel">
+  <div id='Note'>
+    Not to belabor the point, but once again, this site is very much in testing.
+    This bit is a little tricky, I suppose I don't have to explain it too much
+    because you probably don't really care, but right now we're having some users
+    have bugs which are not allowing the player wristband ID's to be revoked 
+    reliably. Apparently a path is being rewritten somewhere on the live site
+    that isn't happening on the test version. All that's not that important, but
+    for right now you'll be getting verbose feedback every time you try to
+    zombify someone through the web interface. Explanation is as follows.
+    First and second line should be the same. This is the name of the person 
+    Zombified. If there is a third line, it will say one of two things.<br>
+    <em>Zombification error:</em> Think this one is pretty much handles but it's exactly
+    what it sounds like. You are not listed on team zombie. It doesn't matter much
+    though because what team you are on can be reverse-engineered from your score.
+    Which isn't much help if you get <br>
+    <em>Messaging error in Revoke ID:</em> This means your score has not been tabulated.
+    Please inform James or Leif at once so they can keep track of the score. <br>
+  </div>
+  <form id='usercp' action="" method='post' accept-charset='UTF-8'>
+    <fieldset >
+      <legend>Edit Profile</legend>
+      <input type='hidden' name='changed' id='changed' value='1'/>
+      <div id="nom">XXXXXX</div> <div id="currentID">XXXXXX</div>
+      <label for="profile">Profile:</label>
+      <textarea name='profile' id='profile' maxlength="1260" rows="10" cols="120"/> </input> </br>
+      <input type='button' name='Change' value='Change' />
+    </fieldset>
+  </form>
+  <form id='killer' action="" method='post' accept-charset='UTF-8'>
+    <fieldset >
+      <legend>Zombify</legend>
+      <input type='hidden' name='kill' id='kill' value='1'/>
+      <div id="APC">Activate Player Code</div>
+      <label for="profile">Enter 8-Digit code(found on wristband):</label>
+      <input name='1CURID' id='1CURID' maxlength="8" rows="1" cols="9"/> </input> </br>
+      <input type='button' name='KUser' id="KUser" value='KUser' />
+    </fieldset>
+  </form>
+</section>
+<div id="cache" class="hidden"></div>
+<script type="text/javascript">
+	var u;
+	$.post("bin/login.php", {getuser:"getuser"} , function( data ) {
+		if(data=='Session Error'){
+			alert(data);
+		}else{
+			u=data;
+			$.get( u, function( data ) {
+				$( "#cache" ).html( data );
+				$( "#PASSWORD" ).remove();
+				$( "#EMAIL" ).remove();
+				$( "#nom" ).html( $( "#USERID" ).html() );
+				$( "#profile" ).html( $( "#PROFILE" ).html() );
+				$( "#currentID" ).html( $( "#CURID" ).html() );
+				$( "#cache" ).remove();
+			});
+		}
+	});
+	$("#Change").on("click", function() {
+		$.post("bin/edituser.php", $( "" ).serialize(), function(data){
+		
+		});
+	});
+	$("#KUser").on("click", function() {
+		$.post("bin/edituser.php", $( "#killer" ).serialize(), function(data){
+			var x = data; var y = x.toString();
+			y.replace(/usr/gi, '.');	y.replace(/md/gi, '.');
+			alert(y);			
+		});
+	});
+	$("#HUser").on("click", function() {
+		$.post("bin/edituser.php", {heal:"heal"}, function(){
+			
+		});
+	});
+</script>
+

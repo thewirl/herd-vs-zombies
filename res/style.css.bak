@@ -1,0 +1,60 @@
+/* Body properties */
+body {
+ 	background-color:#625562;
+ 	color: #B6D0C3;
+ 	font-family: 'sans-serif';
+} 
+/* Order One Headers*/
+h1{
+	font-size:xx-large;
+}
+/* Order One Headers*/
+h2{
+	font-size:x-large;
+}
+/* Paragraph text */
+p{
+	font-size:large;
+
+}
+strong{
+	font-size:x-large;
+}
+.butt{
+	font-size:x-large;
+}
+code{
+	font-size:large;
+}
+/* Change visited link color*/
+a:visited{
+	border-color: #615b54;
+	color: #546154;
+}
+/* Hide an element */
+.hidden{
+	display: none;
+}
+/* Navigation Bar */
+nav{
+	min-height: 15%;
+	width: 100%;
+	text-align: center;
+	background-color: #b59eb5;
+}
+/*  */
+.navb{
+	border-style: solid;
+	border-color: #0a090a;
+	color: #546154;
+	background-color: #B6D0C3;
+	min-width: 15%;
+}
+.L{
+	float:right;
+	width: 45%;
+}
+.F{
+	float: left;
+	width: 45%;
+}
