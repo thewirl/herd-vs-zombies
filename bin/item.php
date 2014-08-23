@@ -1,5 +1,5 @@
 <?php
-//require_conce();
+require_once('edituser.php');
 $ITEM_CONST = array('HEAL' => 1 ,'NONE' => 0);
 class ITEM(){
 	private $itemID;
@@ -60,6 +60,12 @@ class ITEM(){
 			}
 		}
 	}
-	public function action($targetID)
+	public function action($cuser, $targetID){
+		$temp=false;
+		if($input==$this->itemID){
+			$temp=true;
+		}
+		return $temp;
+	}
 }
 ?>

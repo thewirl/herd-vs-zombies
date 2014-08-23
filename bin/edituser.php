@@ -1,5 +1,4 @@
 <?php
-require_once('item.php');
 class REFEREE{
 	function __construct(){
 	}
@@ -116,8 +115,10 @@ if(isset($_POST['heal'])){
 	if(!isset($_SESSION['CUSER'])){
 		echo "Please log in to continue";
 	}else{
-		$refe = new REFEREE();
-		echo $refe->rescue();
+		if(action($_SESSION['CUSER'])){
+			$refe = new REFEREE();
+			echo $refe->rescue();
+		}
 	}
 }
 ?>
